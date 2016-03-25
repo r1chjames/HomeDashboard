@@ -6,24 +6,24 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
   };
  	$scope.menu = [
     {
-      link : '/dashboard.html',
+      link : '/dashboard',
       title: 'Dashboard',
       icon: 'dashboard'
     },
     {
-      link : '/rules.html',
+      link : '/rules',
       title: 'Rules',
       icon: 'schedule'
     },
     {
-      link : '/notifications.html',
+      link : '/notifications',
       title: 'Notifications',
       icon: 'message'
     }
   ];
   $scope.admin = [
     {
-      link : '.public/trash.html',
+      link : '/trash',
       title: 'Trash',
       icon: 'delete'
     },
@@ -33,7 +33,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
       icon: 'settings'
     },
     {
-      link: '.public/Account.html',
+      link: '/Account',
       title: 'Account',
       icon: 'security'
     }

@@ -1,11 +1,10 @@
 angular.module('HomeAutoApp')
 
-.controller("DriverController",function($scope, $http) {
-  $scope.isLoading = true;
-  $http.get('/api/driver').
+
+.controller("RuleController",function($scope, $http) {
+  $http.get('/api/rules').
     success(function(data, status, headers, config) {
-      $scope.drivers = data;
-      $scope.isLoading = false;
+      $scope.rules = data;
     }).
     error(function(data, status, headers, config) {
       // log error

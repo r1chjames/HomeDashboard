@@ -4,6 +4,7 @@ var path = require('path');
 var Activity = require('../models/activity');
 var Driver = require('../models/driver');
 var User = require('../models/user');
+var Rule = require('../models/rule');
 
 // expose the routes to our app with module.exports
 module.exports = function(app) {
@@ -20,6 +21,10 @@ module.exports = function(app) {
     
     app.get('/dashboard', function(req, res) {
             res.sendFile(path.join(__dirname, '../../public', '/dashboard.html'));
+    });
+    
+    app.get('/rules', function(req, res) {
+            res.sendFile(path.join(__dirname, '../../public', '/rules.html'));
     });
     
     app.get('/api/driver', function(req, res) {
@@ -49,6 +54,16 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
             res.json(user);
+        });
+    });
+
+    app.get('/api/rules', function(req, res) {
+        // use mongoose to get all user records from the database
+        Rule.find(function(err, rule) {
+            //if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+            res.json(rule);
         });
     });
 
