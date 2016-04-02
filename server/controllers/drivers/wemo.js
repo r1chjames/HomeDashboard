@@ -5,8 +5,19 @@ module.exports = {
 
 //app.service('wemoService', function() {
 
-setState : function(addr, port, state) {
-    console.log(addr + port + state);
+setState : function(addr, port, inState) {
+    console.log(addr + port + inState);
+    var state;
+    if (inState === 'On') {
+        state = 1;
+    }
+    if (inState === 'Off') {
+        state = 0;
+    }
+    if (inState === 'Toggle') {
+        this.toggleStatus(addr, port);
+    }
+    console.log(state);
     
     	var body = '<?xml version="1.0" encoding="utf-8"?>\n' +
                     '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\n' +
