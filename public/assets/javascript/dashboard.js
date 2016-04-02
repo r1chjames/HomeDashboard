@@ -8,7 +8,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
         $http.post('/api/driver/trigger', {driverID : driverID, action : action}).success(function() {
         }).
         error(function(data, status, headers, config) {
-          console.log('oops');
+          console.log(data + status + headers + config);
     });
     }
 

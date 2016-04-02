@@ -94,20 +94,6 @@ app.use(bodyParser.json());
                 if (err)
                     res.send(err);
                 res.json(res);
-                // http.post('/api/activity', function(req, res){
-                    Activity.create({
-                        driverID : driverID,
-                        title : driver.name + ' now switched ' + action,
-                        body : '',
-                        level : '',
-                        dateTime : Date.now(),
-                        status : action
-                    } ,function(err, driver) {
-            if (err)
-                res.send(err);
-                console.log('created');}
-                );
-                // })
             })
         });
     });
