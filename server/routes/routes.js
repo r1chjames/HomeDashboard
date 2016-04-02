@@ -1,5 +1,6 @@
 // app/routes.js
 var path = require('path');
+var http = require('http');
 var bodyParser = require("body-parser");
 
 var logger = require('winston');
@@ -79,24 +80,31 @@ app.use(bodyParser.json());
         });
     });
     
-    app.post('/api/trigger/', function(req, res) {
+    app.post('/api/driver/trigger', function(req, res) {
         // use mongoose to get all driver records from the database
         logger.log('info','Device trigger for driverID: ' + req.body.driverID + ' for action: ' + req.body.action);
-        var driverID = req.body.driverID,
-            action = req.body.action;
 
-            // Driver.find({ _id : driverID }, 'URI', function(err, driver) {
-            //  if (err)
-            //     res.send(err);
-            //     res.json(driver);
-        //console.log(driverID);
-        WeMo.setState('192.168.0.45', 49153, action, function(err, driver) {
-            //if there is an error retrieving, send the error. nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-            //res.json(driver);
+        Driver.findOne({ _id : req.body.driverID }, function (error, driver){
+            var URI = driver.URI.filter(function (URI) {
+                return URI.ip;
+            }).pop();
+            console.log('ip: ' + URI.ip + ' port: ' + URI.port);
+            WeMo.setState(URI.ip, URI.port, req.body.action, function(err, driver) {
+                //if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                if (err)
+                    res.send(err);
+                res.json(driver);
+                http.post('/api/activity', function(req, res){
+                    Activity.create({
+                        title : driver.name + ' now switched ' + action,
+                        body : '',
+                        level : '',
+                        dateTime : Date.now(),
+                        status : action
+                    });
+                })
+            })
         });
-    //});
     });
 
     app.post('/api/driver', function(req, res) {
@@ -114,7 +122,6 @@ app.use(bodyParser.json());
                 res.json(driver);
             });
         });
-
     });
     
      app.post('/api/activity', function(req, res) {

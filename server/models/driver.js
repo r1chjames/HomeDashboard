@@ -7,9 +7,12 @@ var driverSchema = new Schema({
     name: String,
     family: String,
     type: String,
-    URI: String,
+    URI: [ {ip : String, port: Number} ],
     avatar: String,
-    status: String
+    status: String,
+    actions: {
+        name: String
+    }
 });
 
 driverSchema.set('collection', 'drivers');

@@ -5,7 +5,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
     $mdSidenav(menuId).toggle();
   };
   $scope.trigger = function(driverID, action) {
-        $http.post('/api/trigger', {driverID : driverID, action : action}).success(function() {
+        $http.post('/api/driver/trigger', {driverID : driverID, action : action}).success(function() {
         }).
         error(function(data, status, headers, config) {
           console.log('oops');
