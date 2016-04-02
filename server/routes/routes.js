@@ -96,6 +96,7 @@ app.use(bodyParser.json());
                 res.json(res);
             })
         });
+        res.json(res);
     });
 
     app.post('/api/driver', function(req, res) {
