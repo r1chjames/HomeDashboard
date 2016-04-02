@@ -94,7 +94,7 @@ app.use(bodyParser.json());
                 if (err)
                     res.send(err);
                 res.json(driver);
-                http.post('/api/activity', function(req, res){
+                // http.post('/api/activity', function(req, res){
                     Activity.create({
                         title : driver.name + ' now switched ' + action,
                         body : '',
@@ -102,7 +102,7 @@ app.use(bodyParser.json());
                         dateTime : Date.now(),
                         status : action
                     });
-                })
+                // })
             })
         });
     });
