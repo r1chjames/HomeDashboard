@@ -13,15 +13,14 @@ setState : function(addr, port, inState) {
         state = 0;
     }
     if (inState === 'Toggle') {
-        var getState = this.getStatus(addr, port);
-        if (getState === 0) {
+        if (this.getStatus(addr, port) === 0) {
             state = 1;
         }
         else {
             state = 0;
         }
-        
     }
+    
     console.log(state);
     
     	var body = '<?xml version="1.0" encoding="utf-8"?>\n' +
