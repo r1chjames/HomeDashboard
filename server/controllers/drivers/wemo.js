@@ -13,7 +13,14 @@ setState : function(addr, port, inState) {
         state = 0;
     }
     if (inState === 'Toggle') {
-        state = this.getStatus(addr, port);
+        var getState = this.getStatus(addr, port);
+        if (getState === 0) {
+            state = 1;
+        }
+        else {
+            state = 0;
+        }
+        
     }
     console.log(state);
     
@@ -102,13 +109,13 @@ setState : function(addr, port, inState) {
         
                 if (buffer.indexOf("<BinaryState>1</BinaryState>") > -1) {
                     //_this.setState(addr,0);
-                    state = 0;
+                    state = 1;
                     console.log('WeMo switch is: ON');
                     //loggly.info('WeMo switch is: ON')
                 }
                 if (buffer.indexOf("<BinaryState>0</BinaryState>") > -1) {
                     //_this.setState(addr,1);
-                    state = 1;
+                    state = 0;
                     console.log('WeMo switch is: OFF');
                     //loggly.info('WeMo switch is: OFF');
                 };
