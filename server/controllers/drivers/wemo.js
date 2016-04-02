@@ -39,12 +39,12 @@ toggleStatus : function(addr, port) {
                 //loggly.info('Return XML: \n' + buffer);
         
                 if (buffer.indexOf("<BinaryState>1</BinaryState>") > -1) {
-                    this.setState(addr,0);
+                    setState(addr,0);
                     console.log('WeMo switch is: ON');
                     //loggly.info('WeMo switch is: ON')
                 }
                 if (buffer.indexOf("<BinaryState>0</BinaryState>") > -1) {
-                    this.setState(addr,1);
+                    setState(addr,1);
                     console.log('WeMo switch is: OFF');
                     //loggly.info('WeMo switch is: OFF');
                 };
