@@ -88,15 +88,14 @@ app.use(bodyParser.json());
             var URI = driver.URI.filter(function (URI) {
                 return URI.ip;
             }).pop();
-            console.log('ip: ' + URI.ip + ' port: ' + URI.port);
+            logger.log('info', 'Sending request to IP: ' + URI.ip + ', port: ' + URI.port);
             WeMo.setState(URI.ip, URI.port, req.body.action, function(err, res) {
                 //if there is an error retrieving, send the error. nothing after res.send(err) will execute
                 if (err)
                     res.send(err);
-                res.json(res);
+                res.json('triggered');
             })
         });
-        res.json(res);
     });
 
     app.post('/api/driver', function(req, res) {
