@@ -13,6 +13,8 @@ var userSchema = new Schema({
     updated: Date
 });
 
+userSchema.set('collection', 'users');
+
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;

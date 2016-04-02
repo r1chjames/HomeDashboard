@@ -28,6 +28,9 @@ var ruleSchema = new Schema({
     status: String
 });
 
+
+ruleSchema.set('collection', 'rules');
+
 var Rule = mongoose.model('Rule', ruleSchema);
 
 module.exports = Rule;

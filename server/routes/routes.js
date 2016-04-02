@@ -1,13 +1,21 @@
 // app/routes.js
 var path = require('path');
+var bodyParser = require("body-parser");
+
+var logger = require('winston');
+require('winston-loggly');
 
 var Activity = require('../models/activity');
 var Driver = require('../models/driver');
 var User = require('../models/user');
 var Rule = require('../models/rule');
+var WeMo = require('../controllers/drivers/wemo');
 
 // expose the routes to our app with module.exports
 module.exports = function(app) {
+    
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
     // api ---------------------------------------------------------------------
     
@@ -25,6 +33,10 @@ module.exports = function(app) {
     
     app.get('/rules', function(req, res) {
             res.sendFile(path.join(__dirname, '../../public', '/rules.html'));
+    });
+    
+    app.get('/drivers', function(req, res) {
+            res.sendFile(path.join(__dirname, '../../public', '/drivers.html'));
     });
     
     app.get('/api/driver', function(req, res) {
@@ -65,6 +77,27 @@ module.exports = function(app) {
                 res.send(err);
             res.json(rule);
         });
+    });
+    
+    app.post('/api/trigger/', function(req, res) {
+        // use mongoose to get all driver records from the database
+        logger.log('info','Device trigger for driverID: ' + req.body.driverID + ' for action: ' + req.body.action);
+        var driverID = req.body.driverID,
+            action = req.body.action;
+
+            // Driver.find({ _id : driverID }, 'URI', function(err, driver) {
+            //  if (err)
+            //     res.send(err);
+            //     res.json(driver);
+        //console.log(driverID);
+        WeMo.toggleStatus('192.168.0.45',49153, function(err, driver) {
+            console.log('hello');
+            //if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+            //res.json(driver);
+        });
+    //});
     });
 
     app.post('/api/driver', function(req, res) {

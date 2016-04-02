@@ -12,6 +12,8 @@ var driverSchema = new Schema({
     status: String
 });
 
+driverSchema.set('collection', 'drivers');
+
 var Driver = mongoose.model('Driver', driverSchema);
 
 module.exports = Driver;

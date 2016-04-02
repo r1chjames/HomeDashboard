@@ -23,7 +23,7 @@
               </div>
             </div>
           </md-toolbar>
-          <md-list>
+          <md-list ng-controller="SideNavController">
             <md-item ng-repeat="item in menu">
               <a ng-href="{{item.link}}">
                 <md-item-content md-ink-ripple layout="row" layout-align="start center" ng-click="">
@@ -117,6 +117,9 @@
                                   <h3>{{driver.name}}</h3>
                                   <h4>{{driver.type}}</h4>
                                   <p>{{driver.status}}</p>
+                                  <md-item ng-repeat="action in driver.actions">
+                                    <button ng-click="trigger( driver._id, 'toggle');">{{action.name}}</button>
+                                  </md-item>
                                 </div>
                               </md-item-content>
                               <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
@@ -139,7 +142,7 @@
                           <h2>Activity</h2>
                           <md-list>
                             <div ng-controller="ActivityController">
-                            <md-item ng-repeat="activity in activity | filter:search | orderBy:'status'">
+                            <md-item ng-repeat="activity in activity | filter:search">
                               <md-item-content>
                                 <div class="md-tile-left inset" hide-sm>
                                     <svg id="driverAvatar" height="60" width="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -186,6 +189,7 @@
         <script type="text/javascript" src="controllers/userController.js"></script>
         <script type="text/javascript" src="controllers/driverController.js"></script>
         <script type="text/javascript" src="controllers/activityController.js"></script>
+        <script type="text/javascript" src="controllers/sideNavController.js"></script>
         <!--<script type="text/javascript" src="directives/dashboard-tabs.js"></script>-->
     </body>
 </html>

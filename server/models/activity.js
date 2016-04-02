@@ -12,6 +12,8 @@ var activitySchema = new Schema({
     status: String
 });
 
+activitySchema.set('collection', 'activity');
+
 var Activity = mongoose.model('Activity', activitySchema);
 
 module.exports = Activity;
