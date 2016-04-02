@@ -101,7 +101,11 @@ app.use(bodyParser.json());
                         level : '',
                         dateTime : Date.now(),
                         status : action
-                    });
+                    } ,function(err, driver) {
+            if (err)
+                res.send(err);
+                console.log('created');}
+                );
                 // })
             })
         });
