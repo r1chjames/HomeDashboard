@@ -6,9 +6,9 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
   };
   $scope.trigger = function(driverID, action) {
         $http.post('/api/driver/trigger', {driverID : driverID, action : action}).success(function() {
+          console.log('done');
         }).
         error(function(data, status, headers, config) {
-          console.log(data + status + headers + config);
     });
     }
 
