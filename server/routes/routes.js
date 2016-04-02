@@ -89,13 +89,14 @@ app.use(bodyParser.json());
                 return URI.ip;
             }).pop();
             console.log('ip: ' + URI.ip + ' port: ' + URI.port);
-            WeMo.setState(URI.ip, URI.port, req.body.action, function(err, driver) {
+            WeMo.setState(URI.ip, URI.port, req.body.action, function(err, res) {
                 //if there is an error retrieving, send the error. nothing after res.send(err) will execute
                 if (err)
                     res.send(err);
-                res.json(driver);
+                res.json(res);
                 // http.post('/api/activity', function(req, res){
                     Activity.create({
+                        driverID : driverID,
                         title : driver.name + ' now switched ' + action,
                         body : '',
                         level : '',
