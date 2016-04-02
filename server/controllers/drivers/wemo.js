@@ -13,11 +13,11 @@ setState : function(addr, port, inState) {
         state = 0;
     }
     if (inState === 'Toggle') {
-        if (this.getStatus(addr, port) === 0) {
-            state = 1;
+        if (this.getStatus(addr, port) === 1) {
+            state = 0;
         }
         else {
-            state = 0;
+            state = 1;
         }
     }
     
