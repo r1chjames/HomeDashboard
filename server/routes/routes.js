@@ -90,8 +90,7 @@ app.use(bodyParser.json());
             //     res.send(err);
             //     res.json(driver);
         //console.log(driverID);
-        WeMo.setState('192.168.0.45', 49153, 1, function(err, driver) {
-            console.log('hello');
+        WeMo.setState('192.168.0.45', 49153, action, function(err, driver) {
             //if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err);

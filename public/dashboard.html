@@ -118,7 +118,7 @@
                                   <h4>{{driver.type}}</h4>
                                   <p>{{driver.status}}</p>
                                   <md-item ng-repeat="action in driver.actions">
-                                    <button ng-click="trigger( driver._id, 'toggle');">{{action.name}}</button>
+                                    <button ng-click="trigger( driver._id, action.name);">{{action.name}}</button>
                                   </md-item>
                                 </div>
                               </md-item-content>
