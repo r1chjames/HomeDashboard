@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.0.1",
   "dependencies": {
+    "agenda": "^0.8.0",
     "angular-jwt": "0.0.9",
     "angular-storage": "0.0.13",
     "auth0-angular": "^4.1.0",
