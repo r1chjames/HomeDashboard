@@ -1,17 +1,17 @@
-var app = angular.module('HomeAutoApp', ['ngMaterial', 'ngMdIcons']);
+var app = angular.module('dashboardCtrl', [])//.controller('DashboardController', function($scope) {
 
-app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$http', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $http){
+.controller('DashboardController',  function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $http){ //['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$http',
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
+
   $scope.trigger = function(driverID, action) {
-        $http.post('/api/driver/trigger', {driverID : driverID, action : action}).success(function() {
-          console.log('done');
+        $http.post('/api/v1/driver/trigger', {driverID : driverID, action : action}).success(function() {
         }).
         error(function(data, status, headers, config) {
     });
     }
-
+    
 
   $scope.alert = '';
   $scope.showListBottomSheet = function($event) {
@@ -28,7 +28,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
   $scope.showAdd = function(ev) {
     $mdDialog.show({
       controller: DialogController,
-      template: 'assets/templates/addDriver.html',
+      template: 'views/addDriver.html',
       targetEvent: ev,
     })
     .then(function(answer) {
@@ -37,9 +37,9 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
       $scope.alert = 'You cancelled the dialog.';
     });
   };
-}]);
+})
 
-app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
+.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
   $scope.items = [
     { name: 'Share', icon: 'share' },
     { name: 'Upload', icon: 'upload' },
@@ -65,27 +65,27 @@ function DialogController($scope, $mdDialog) {
   };
 };
 
+// app.config(function($mdThemingProvider) {
+//   var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
+//     'contrastDefaultColor': 'light',
+//     'contrastDarkColors': ['50'],
+//     '50': 'ffffff'
+//   });
+//   $mdThemingProvider.definePalette('customBlue', customBlueMap);
+//   $mdThemingProvider.theme('default')
+//   .primaryPalette('customBlue', {
+//     'default': '500',
+//     'hue-1': '50'
+//   })
+//   .accentPalette('pink');
+//   $mdThemingProvider.theme('input', 'default')
+//   .primaryPalette('grey')
+  
+// });
+
 // app.directive('driverAvatar', function() {
 //   return {
 //     replace: true,
 //     template: '<svg id="userAvatar" height="60" width="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" > <image x="0" y="0" height="60" width="60"  xlink:href="styles/WeMo.png" />'
 //   };
-// });
-    
-app.config(function($mdThemingProvider) {
-  var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
-    'contrastDefaultColor': 'light',
-    'contrastDarkColors': ['50'],
-    '50': 'ffffff'
-  });
-  $mdThemingProvider.definePalette('customBlue', customBlueMap);
-  $mdThemingProvider.theme('default')
-  .primaryPalette('customBlue', {
-    'default': '500',
-    'hue-1': '50'
-  })
-  .accentPalette('pink');
-  $mdThemingProvider.theme('input', 'default')
-  .primaryPalette('grey')
-  
-});
+//});

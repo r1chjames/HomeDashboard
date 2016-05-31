@@ -1,4 +1,4 @@
-var app = angular.module("HomeAutoApp", []);
+var app = angular.module("dbt", []);
 
 app.directive("dashboardTabs", function() {
   return {

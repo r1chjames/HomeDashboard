@@ -1,13 +1,12 @@
-angular.module('HomeAutoApp')
+angular.module('activityCtrl', [])
 
-.controller("DriverController",function($scope, $http) {
+.controller("ActivityController",function($scope, $http) {
   $scope.isLoading = true;
-  $http.get('/api/driver').
+  $http.get('/api/v1/activity').
     success(function(data, status, headers, config) {
-      $scope.drivers = data;
+      $scope.activity = data;
       $scope.isLoading = false;
     }).
     error(function(data, status, headers, config) {
-      // log error
     });
 });
